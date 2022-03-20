@@ -1,0 +1,26 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Oswald:wght@500&display=swap");
+
+:root {
+  --main: #133951;
+  --bg: #b9d2d6;
+  --font: "Noto Sans", sans-serif;
+}
+
+html,
+body,
+#__next {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  background-color: var(--bg);
+  font-family: var(--font);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}

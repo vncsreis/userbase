@@ -1,0 +1,12 @@
+.header {
+  background-color: var(--main);
+  font-family: var(--font-h);
+  color: #fcfcfc;
+  padding: 6px;
+  border-radius: 5px 5px 0px 0px;
+}
+
+.title {
+  padding: 6px;
+  margin: 0px;
+}

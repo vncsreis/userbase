@@ -1,0 +1,6 @@
+.footer {
+  background-color: var(--main);
+  color: #fcfcfc;
+  padding: 4px;
+  border-radius: 0px 0px 5px 5px;
+}

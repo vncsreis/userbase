@@ -1,0 +1,21 @@
+.nav {
+  display: flex;
+}
+
+.nav::after {
+  content: "";
+  margin: auto 20px;
+  height: 95%;
+  width: 1px;
+  background-color: var(--bg);
+}
+
+.mainList {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+}
+
+.subList {
+  list-style: none;
+}

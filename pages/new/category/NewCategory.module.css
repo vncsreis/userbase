@@ -1,0 +1,12 @@
+.radioInputs {
+  display: flex;
+  flex-direction: column;
+}
+
+.radioInputRow {
+  display: flex;
+}
+
+.radioInputRow > input {
+  margin-left: auto;
+}
