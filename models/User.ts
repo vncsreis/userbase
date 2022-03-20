@@ -4,7 +4,7 @@ export class User {
   readonly id: string;
   readonly name: string;
   readonly email: string;
-  readonly category: string;
+  category: string;
 
   constructor(name: string, email: string, category: string) {
     this.email = email;
