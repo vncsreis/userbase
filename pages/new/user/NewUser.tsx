@@ -20,6 +20,10 @@ const NewUser = () => {
       const newUser = new User(name, email, category);
 
       setUsers([...users, newUser]);
+
+      setName('');
+      setEmail('');
+      setCategory(categories[0].id);
     }
   }
 
