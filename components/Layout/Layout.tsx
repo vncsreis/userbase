@@ -13,7 +13,7 @@ const Layout = ({ children }: LayoutProps) => {
       <Header />
       <section className={styles.sectionContent}>
         <Nav />
-        <div>{children}</div>
+        {children}
       </section>
       <Footer />
     </div>

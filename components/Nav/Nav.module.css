@@ -3,11 +3,15 @@
 }
 
 .nav::after {
-  content: "";
-  margin: auto 20px;
+  content: '';
+  margin: auto 50px;
   height: 95%;
   width: 1px;
   background-color: var(--bg);
+}
+
+.item:hover {
+  color: var(--main);
 }
 
 .mainList {
@@ -18,4 +22,13 @@
 
 .subList {
   list-style: none;
+  padding-left: 20px;
+}
+
+.break {
+  content: '';
+  margin: 5px auto;
+  height: 1px;
+  width: 95%;
+  background-color: var(--bg);
 }
