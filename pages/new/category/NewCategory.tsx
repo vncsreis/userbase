@@ -7,7 +7,7 @@ import styles from './NewCategory.module.css';
 const NewCategory = () => {
   const [selectedLevel, setSelectedLevel] = useState<0 | 1 | 2>(0);
   const [name, setName] = useState<string>('');
-  const [parentCategory, setParentCategory] = useState<string>('');
+  const [parentCategoryId, setParentCategoryId] = useState<string>('');
   const [categoriesOnSelect, setCategoriesOnSelect] = useState<string[]>([]);
   const [firstLevelCategories, setFirstLevelCategories] = useState<Category[]>(
     [],
@@ -37,23 +37,42 @@ const NewCategory = () => {
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    let categoryArray = [...categories];
-
-    const category = new Category(name, selectedLevel, parentCategory);
-
-    if (users.find((user) => user.category === category.parentId)) {
-      window.alert('Failed! Users in parent category');
-      return;
-    }
 
     if (name.length === 0) {
       window.alert('Empty name');
       return;
     }
 
-    if (parentCategory !== '0') {
+    let categoryArray = [...categories];
+
+    const category = new Category(name, selectedLevel, parentCategoryId);
+
+    if (users.find((user) => user.category === category.parentId)) {
+      const parentCategory = categories.find(
+        (cat) => cat.id === parentCategoryId,
+      );
+      if (parentCategory) {
+        const userReplaceCategory = new Category(
+          parentCategory.name,
+          (parentCategory.level + 1) as 1 | 2,
+          parentCategory.id,
+        );
+
+        users.forEach((user) => {
+          if (user.category === parentCategory.id) {
+            user.category = userReplaceCategory.id;
+          }
+        });
+
+        categoryArray.push(userReplaceCategory);
+      }
+
+      window.alert('Users in parent category! Category cloned as child');
+    }
+
+    if (parentCategoryId !== '0') {
       categoryArray = categoryArray.map((cat) => {
-        if (cat.id === parentCategory) {
+        if (cat.id === parentCategoryId) {
           cat.disableUsers();
         }
         return cat;
@@ -108,7 +127,7 @@ const NewCategory = () => {
               checked={selectedLevel === 1}
               onClick={() => {
                 setSelectedLevel(1);
-                setParentCategory(categoriesOnSelect[0]);
+                setParentCategoryId(categoriesOnSelect[0]);
               }}
             />
           </div>
@@ -120,7 +139,7 @@ const NewCategory = () => {
               checked={selectedLevel === 2}
               onClick={() => {
                 setSelectedLevel(2);
-                setParentCategory(categoriesOnSelect[1]);
+                setParentCategoryId(categoriesOnSelect[1]);
               }}
             />
           </div>
@@ -138,22 +157,37 @@ const NewCategory = () => {
                   categoriesOnSelect[1],
                 ]);
                 if (selectedLevel === 1) {
-                  setParentCategory(e.currentTarget.value);
+                  setParentCategoryId(e.currentTarget.value);
                 } else if (selectedLevel === 2) {
-                  const correctedCat = secondLevelCategories.filter(
+                  const correctedCatId = secondLevelCategories.filter(
                     (cat) => cat.parentId === e.currentTarget.value,
                   )[0].id;
 
-                  setCategoriesOnSelect([e.currentTarget.value, correctedCat]);
-                  setParentCategory(correctedCat);
+                  setCategoriesOnSelect([
+                    e.currentTarget.value,
+                    correctedCatId,
+                  ]);
+                  setParentCategoryId(correctedCatId);
                 }
               }}
             >
-              {firstLevelCategories.map((cat) => (
-                <option key={cat.id} value={cat.id}>
-                  {cat.name}
-                </option>
-              ))}
+              {firstLevelCategories.map((cat) => {
+                if (selectedLevel === 1) {
+                  return (
+                    <option key={cat.id} value={cat.id}>
+                      {cat.name}
+                    </option>
+                  );
+                } else if (selectedLevel === 2) {
+                  if (cat.hasChildCategory()) {
+                    return (
+                      <option key={cat.id} value={cat.id}>
+                        {cat.name}
+                      </option>
+                    );
+                  }
+                }
+              })}
             </select>
           )}
           {selectedLevel === 2 && (
@@ -166,7 +200,7 @@ const NewCategory = () => {
                   e.currentTarget.value,
                 ]);
                 if (selectedLevel === 2) {
-                  setParentCategory(e.currentTarget.value);
+                  setParentCategoryId(e.currentTarget.value);
                 }
               }}
             >
@@ -184,8 +218,6 @@ const NewCategory = () => {
         </div>
         <button type="submit">Add</button>
       </form>
-      <div>name: {name}</div>
-      {selectedLevel > 0 && <div>parent: {parentCategory}</div>}
     </div>
   );
 };
