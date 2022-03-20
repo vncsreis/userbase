@@ -92,11 +92,12 @@ const NewCategory = () => {
   }, [categories]);
 
   return (
-    <div>
-      {categoriesCanHaveUser.map((cat) => {})}
+    <div className={styles.content}>
+      <h1>New Category</h1>
+
       <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="category-name">New Category Name</label>
+        <div className={styles.inputRow}>
+          <label htmlFor="category-name">New Category Name: </label>
           <input
             type="text"
             id="category-name"
@@ -107,19 +108,18 @@ const NewCategory = () => {
           />
         </div>
         <div className={styles.radioInputs}>
-          <div className={styles.radioInputRow}>
+          <div className={styles.inputRow}>
             <label htmlFor="radio-0">Root level category</label>
             <input
               type="radio"
               id="radio-0"
               checked={selectedLevel === 0}
               onClick={() => {
-                // setParentCategory([0]);
                 setSelectedLevel(0);
               }}
             />
           </div>
-          <div className={styles.radioInputRow}>
+          <div className={styles.inputRow}>
             <label htmlFor="radio-1">Subcategory</label>
             <input
               type="radio"
@@ -131,7 +131,7 @@ const NewCategory = () => {
               }}
             />
           </div>
-          <div className={styles.radioInputRow}>
+          <div className={styles.inputRow}>
             <label htmlFor="radio-2">Sub-Subcategory</label>
             <input
               type="radio"
@@ -145,7 +145,7 @@ const NewCategory = () => {
           </div>
         </div>
 
-        <div>
+        <div className={styles.inputRow}>
           <label htmlFor="select-parent-1">Select Parent Category</label>
           {selectedLevel >= 1 && (
             <select
@@ -216,7 +216,9 @@ const NewCategory = () => {
             </select>
           )}
         </div>
-        <button type="submit">Add</button>
+        <button type="submit" className={styles.button}>
+          Add
+        </button>
       </form>
     </div>
   );

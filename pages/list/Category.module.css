@@ -1,0 +1,33 @@
+.navArrow {
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+}
+
+.navArrow:hover {
+  color: var(--main);
+}
+
+.link:hover {
+  color: var(--main);
+}
+
+.content {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0px auto;
+}
+
+.page {
+  width: 80%;
+}
+
+.linkList {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  font-size: 1.1rem;
+  align-items: center;
+}

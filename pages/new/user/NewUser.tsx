@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useCategoriesContext } from '../../../context/CategoriesContext';
 import { useUsersContext } from '../../../context/UsersContext';
 import { User } from '../../../models/User';
+import styles from './NewUser.module.css';
 
 const NewUser = () => {
   const { categories } = useCategoriesContext();
@@ -28,8 +29,9 @@ const NewUser = () => {
   }
 
   return (
-    <div>
+    <div className={styles.content}>
       <form onSubmit={handleSubmit}>
+        <h1>New User</h1>
         <div>
           <label htmlFor="new-user-name">New User Name</label>:
           <input
@@ -66,13 +68,10 @@ const NewUser = () => {
             })}
           </select>
         </div>
-        <button type="submit">Add</button>
+        <button type="submit" className={styles.button}>
+          Add
+        </button>
       </form>
-      <div>
-        <h1>{name}</h1>
-        <h1>{email}</h1>
-        <h1>{category}</h1>
-      </div>
     </div>
   );
 };

@@ -3,10 +3,26 @@
   flex-direction: column;
 }
 
-.radioInputRow {
+.inputRow {
   display: flex;
+  width: 400px;
 }
 
-.radioInputRow > input {
+.inputRow > input {
   margin-left: auto;
+}
+
+.inputRow > select:first-of-type {
+  margin-left: auto;
+}
+
+.content {
+  width: 80%;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.button {
+  margin: 20px;
 }
