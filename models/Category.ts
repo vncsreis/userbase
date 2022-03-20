@@ -11,6 +11,7 @@ export class Category implements ICategory {
   readonly id: string;
   readonly level: 0 | 1 | 2;
   private canHaveUser = true;
+  private hasChild = false;
 
   constructor(
     name: string,
@@ -37,5 +38,17 @@ export class Category implements ICategory {
 
   disableUsers() {
     this.canHaveUser = false;
+  }
+
+  hasChildCategory() {
+    return this.hasChild;
+  }
+
+  enableChild() {
+    this.hasChild = true;
+  }
+
+  disableChild() {
+    this.hasChild = false;
   }
 }

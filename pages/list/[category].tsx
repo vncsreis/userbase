@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useCategoriesContext } from '../../context/CategoriesContext';
+import { useUsersContext } from '../../context/UsersContext';
 import { baseUsers } from '../../models/baseUsers';
 import { User } from '../../models/User';
 
@@ -8,6 +9,7 @@ const CategoryList = () => {
   const { categories } = useCategoriesContext();
   const router = useRouter();
   const { category: urlId } = router.query;
+  const { users } = useUsersContext();
 
   const category = categories.find((cat) => cat.id === urlId);
 
@@ -33,11 +35,11 @@ const CategoryList = () => {
         <Link href={`/list/${category.parentId}`}>{'<-'}</Link>
       )}
       <h1>
-        {category.canHaveUsers() ? 'Can have users' : 'Cannot have users'}
+        {category.hasChildCategory() ? 'Has Child' : 'Does Not Have Child'}
       </h1>
-      <div style={{ border: 'solid red 1px' }}>
+      <div>
         <h1>{category.name}</h1>
-        {category.canHaveUsers() && renderUsers(baseUsers, category.id)}
+        {category.canHaveUsers() && renderUsers(users, category.id)}
       </div>
       {children.length > 0 &&
         children.map((cat) => (
